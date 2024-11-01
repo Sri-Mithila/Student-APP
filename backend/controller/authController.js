@@ -1,7 +1,7 @@
 const { getUserByFacultyId } = require('../model/facultyModel');
 const bcrypt = require('bcrypt');
 
-// Login controller
+
 const login = (req, res) => {
     const { faculty_id, password } = req.body;
 
@@ -19,7 +19,7 @@ const login = (req, res) => {
     });
 };
 
-// Logout controller
+
 const logout = (req, res) => {
     req.session.destroy((err) => {
         if (err) return res.status(500).json({ error: 'Failed to log out' });
@@ -27,7 +27,6 @@ const logout = (req, res) => {
     });
 };
 
-// Check if user is authenticated
 const checkAuth = (req, res) => {
     if (req.session.user) {
         res.status(200).json({ isAuthenticated: true, user: req.session.user });

@@ -31,7 +31,7 @@ async function getAccessToken(oAuth2Client) {
     });
     console.log('Authorize this app by visiting this url:', authUrl);
 
-    const { code } = await promptUserForCode();  // This step may vary depending on your implementation
+    const { code } = await promptUserForCode();  
 
     try {
         const { tokens } = await oAuth2Client.getToken(code);
@@ -40,14 +40,14 @@ async function getAccessToken(oAuth2Client) {
         console.log('Token stored successfully');
         return oAuth2Client;
     } catch (err) {
-        console.error('Error retrieving access token:', err.message);  // Enhanced logging for debugging
+        console.error('Error retrieving access token:', err.message);  
     }
 }
 
 
 const googleAuth = async (req, res) => {
     const authUrl = await getAccessToken(await authorize());
-    res.redirect(authUrl); // Redirect to Google login
+    res.redirect(authUrl); 
 };
 
 module.exports = { authorize, googleAuth };

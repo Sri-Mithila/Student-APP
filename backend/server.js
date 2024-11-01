@@ -5,7 +5,7 @@ const session = require('express-session');
 const authRoutes = require('./router/authRouter');
 const oauthRoutes = require('./router/oauthRouter');
 const driveRouter = require('./router/driveRouter');
-const sheetRouter = require('./router/sheetRouter');  // Ensure sheetRouter is required correctly
+const sheetRouter = require('./router/sheetRouter');  
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 
@@ -16,7 +16,7 @@ app.use(cors({
     credentials: true
 }));
 app.use(session({
-    secret: 'Th15I570pS3cr3t', // Use an environment variable for production
+    secret: process.env.SESSION_SECRET, 
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 5 * 60 * 60 * 1000 },

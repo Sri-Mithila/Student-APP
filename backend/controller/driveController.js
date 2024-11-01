@@ -38,7 +38,6 @@ const createSpreadsheet = async (req, res) => {
         });
         const spreadsheetId = spreadsheet.data.spreadsheetId;
 
-        // Move spreadsheet to the specified folder
         const drive = google.drive({ version: 'v3', auth });
         await drive.files.update({
             fileId: spreadsheetId,
