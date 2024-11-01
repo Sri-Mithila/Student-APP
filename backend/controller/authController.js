@@ -14,7 +14,7 @@ const login = (req, res) => {
             if (!result) return res.status(401).json({ error: 'Invalid credentials' });
 
             req.session.user = { id: user.id, faculty_id: user.faculty_id, name: user.name };
-            res.status(200).json({ message: 'Login successful' });
+            res.status(200).json({ message: 'Login successful', user: req.session.user });
         });
     });
 };
