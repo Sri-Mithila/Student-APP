@@ -23,4 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 config.env
 credentials.json
+token.json
 /backend/.env
+/backend/token.json
