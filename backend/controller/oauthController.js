@@ -23,7 +23,6 @@ async function authorize() {
     return oAuth2Client;
 }
 
-
 async function getAccessToken(oAuth2Client) {
     const authUrl = oAuth2Client.generateAuthUrl({
         access_type: 'offline',
@@ -44,10 +43,17 @@ async function getAccessToken(oAuth2Client) {
     }
 }
 
-
 const googleAuth = async (req, res) => {
-    const authUrl = await getAccessToken(await authorize());
-    res.redirect(authUrl); 
+    const oAuth2Client = await authorize();
+    const authUrl = await getAccessToken(oAuth2Client);
+
+    if (authUrl) {
+        console.log("Redirecting to home page...");
+        res.render('home'); 
+    } else {
+        console.log("Redirecting to authorization URL...");
+        res.redirect(authUrl);
+    }
 };
 
 module.exports = { authorize, googleAuth };

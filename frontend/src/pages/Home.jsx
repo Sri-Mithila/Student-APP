@@ -11,10 +11,33 @@ const Home = ({ setAuth }) => {
         }
     };
 
+    const handleAuthorize = async () => {
+        try {
+            await axios.get('http://localhost:5000/api/auth/google');
+            console.log("Authorization successful");
+        } catch (err) {
+            console.error('Authorization failed', err);
+        }
+    };
     return (
-        <div>
-            <h1>Welcome, User!</h1>
-            <button onClick={handleLogout}>Logout</button>
+        <div className="grid grid-cols-2 gap-6 p-8 bg-gray-100 h-screen items-center justify-center">
+            <div className="col-span-2 bg-white shadow-md p-6 rounded-lg text-center text-xl font-bold text-gray-800 transform transition-transform hover:-translate-y-1">
+                <h1>Welcome, User!</h1>
+            </div>
+            <div className="bg-white shadow-md p-6 rounded-lg text-center transform transition-transform hover:-translate-y-1 space-y-4">
+                <button 
+                    onClick={handleAuthorize} 
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                >
+                    Authorize
+                </button>
+                <button 
+                    onClick={handleLogout} 
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                >
+                    Logout
+                </button>
+            </div>
         </div>
     );
 };
