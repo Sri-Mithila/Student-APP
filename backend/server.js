@@ -6,6 +6,7 @@ const authRoutes = require('./router/authRouter');
 const oauthRoutes = require('./router/oauthRouter');
 const driveRouter = require('./router/driveRouter');
 const sheetRouter = require('./router/sheetRouter');  
+const getPDFRouter = require('./router/getPDFRouter');  
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 
@@ -26,6 +27,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/auth', oauthRoutes);
 app.use('/drive', driveRouter);
 app.use('/sheet', sheetRouter); 
+app.use('/pdf',getPDFRouter);
 
 
 const PORT = process.env.PORT || 5000;

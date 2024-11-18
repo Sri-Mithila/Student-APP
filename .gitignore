@@ -26,3 +26,6 @@ credentials.json
 token.json
 /backend/.env
 /backend/token.json
+/backend/node_modules
+/node_modules
+/frontend/node_modules

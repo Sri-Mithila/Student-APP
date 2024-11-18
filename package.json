@@ -1,7 +1,16 @@
 {
   "dependencies": {
+    "@googleapis/docs": "^3.3.0",
+    "@googleapis/drive": "^8.14.0",
+    "@googleapis/sheets": "^9.3.1",
+    "@pspdfkit/nodejs": "^0.0.6",
     "cors": "^2.8.5",
+    "docx-pdf": "^0.0.1",
+    "docxtemplater": "^3.51.2",
+    "libreoffice-convert": "^1.6.0",
     "mysql2": "^3.11.3",
+    "pizzip": "^3.1.7",
+    "puppeteer": "^23.8.0",
     "sequelize": "^6.37.5"
   }
 }
