@@ -5,16 +5,22 @@ const Login = ({ setAuth }) => {
     const [facultyId, setFacultyId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [auth, setAuthState] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/auth/login', { faculty_id: facultyId, password });
-            setAuthState(true); // Set auth to true on success
-            setError(null); // Clear error message
+            const response = await axios.post('http://localhost:5000/api/auth/login', { faculty_id: facultyId, password });
+            const token = response.data.token;
+
+            if(response.status === 200)
+            {
+                localStorage.setItem('token', token);
+                setAuth(true);
+                setError(null);
+            }
         } catch (err) {
-            setAuthState(false); // Set auth to false if login fails
+            setAuth(false); 
+            console.error(err)// Set auth to false if login fails
             setError('Invalid credentials');
         }
     };
@@ -56,16 +62,6 @@ const Login = ({ setAuth }) => {
                     </button>
                     {error && <p className="text-sm text-center text-red-500">{error}</p>}
                 </form>
-
-                {/* Display "Authorize" button when login is successful */}
-                {auth && (
-                    <button
-                        className="w-full py-3 mt-6 font-semibold text-white bg-gradient-to-r from-green-400 to-green-600 rounded-lg shadow-lg hover:bg-gradient-to-l hover:from-green-600 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-400"
-                        onClick={() => setAuth(true)}
-                    >
-                        Authorize
-                    </button>
-                )}
             </div>
         </section>
     );
