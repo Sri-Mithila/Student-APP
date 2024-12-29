@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
-import {Login, Home} from './pages'
+import { Login, Home } from './pages';
 
 axios.defaults.withCredentials = true;
 
@@ -9,13 +9,22 @@ const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/auth/check-auth')
-            .then((response) => {
-                setIsAuthenticated(response.data.isAuthenticated);
+        const token = localStorage.getItem('token');
+        if (token) {
+            axios.get('http://localhost:5000/api/auth/check-auth', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
-            .catch(() => {
-                setIsAuthenticated(false);
-            });
+                .then((response) => {
+                    setIsAuthenticated(response.data.isAuthenticated);
+                })
+                .catch(() => {
+                    setIsAuthenticated(false);
+                });
+        } else {
+            setIsAuthenticated(false);
+        }
     }, []);
 
     return (
